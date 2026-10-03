@@ -1,0 +1,65 @@
+[
+  {
+    "id": "eval_01_factual",
+    "task_type": "factual",
+    "message": "What is the speed of light in vacuum in meters per second?",
+    "expected_keyword": "299,792,458",
+    "system_prompt": "Answer accurately and concisely."
+  },
+  {
+    "id": "eval_02_factual",
+    "task_type": "factual",
+    "message": "Who proposed the theory of general relativity?",
+    "expected_keyword": "Einstein",
+    "system_prompt": "Answer accurately."
+  },
+  {
+    "id": "eval_03_code",
+    "task_type": "code",
+    "message": "Write a Python function to reverse a string.",
+    "expected_keyword": "def",
+    "system_prompt": "Write clean Python code."
+  },
+  {
+    "id": "eval_04_code",
+    "task_type": "code",
+    "message": "Identify the bug: `arr = [1, 2, 3]; print(arr[3])`",
+    "expected_keyword": "IndexError",
+    "system_prompt": "Analyze python code bugs."
+  },
+  {
+    "id": "eval_05_analytical",
+    "task_type": "analytical",
+    "message": "Compare SQL vs NoSQL databases in terms of schema flexibility and ACID compliance.",
+    "expected_keyword": "ACID",
+    "system_prompt": "Provide a structured analytical summary."
+  },
+  {
+    "id": "eval_06_analytical",
+    "task_type": "analytical",
+    "message": "Explain why time complexity of quicksort is O(n log n) on average.",
+    "expected_keyword": "partition",
+    "system_prompt": "Provide logical analysis."
+  },
+  {
+    "id": "eval_07_structured_extraction",
+    "task_type": "structured_extraction",
+    "message": "Extract person name and city: 'Alice Johnson lives in Seattle, WA.'",
+    "expected_keyword": "Alice",
+    "system_prompt": "Extract structured data cleanly."
+  },
+  {
+    "id": "eval_08_long_context",
+    "task_type": "factual",
+    "message": "What was the final result discussed in the document?",
+    "context": [
+      {
+        "type": "document",
+        "content": "Section 1: Initial experiments failed due to noise. Section 2: Secondary calibration yielded 99.4% accuracy rate.",
+        "importance": 0.9
+      }
+    ],
+    "expected_keyword": "99.4%",
+    "system_prompt": "Answer based on context."
+  }
+]

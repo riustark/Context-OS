@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environment
+.env
+.env.local
+*.env
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.hypothesis/
+
+# Node / Frontend
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Logs
+*.log
+
+# Docker data
+.dockerdata/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
