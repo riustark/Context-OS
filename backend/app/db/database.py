@@ -7,20 +7,19 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 from app.core.config import settings
 
-# Setup engine with fallback to SQLite for local lightweight execution/testing if Postgres is unavailable
+# Setup engine with fallback to SQLite for lightweight execution if Postgres is unavailable
 db_url = settings.DATABASE_URL
-if db_url.startswith("postgresql") and "localhost" in db_url:
-    # Use SQLite for testing/standalone dev if Postgres container is not running
-    try:
-        engine = create_engine(db_url, pool_pre_ping=True)
-        # Test connection
-        conn = engine.connect()
-        conn.close()
-    except Exception:
-        db_url = "sqlite:///./contextos.db"
-        engine = create_engine(db_url, connect_args={"check_same_thread": False})
-else:
-    engine = create_engine(db_url, pool_pre_ping=True if "postgresql" in db_url else False)
+try:
+    if db_url.startswith("postgresql"):
+        temp_engine = create_engine(db_url, pool_pre_ping=True)
+        with temp_engine.connect() as conn:
+            pass
+        engine = temp_engine
+    else:
+        engine = create_engine(db_url, connect_args={"check_same_thread": False} if "sqlite" in db_url else {})
+except Exception:
+    db_url = "sqlite:///./contextos.db"
+    engine = create_engine(db_url, connect_args={"check_same_thread": False})
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
