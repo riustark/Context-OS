@@ -1,0 +1,33 @@
+services:
+  # ----------------------------------------------------------------------------
+  # Backend Web Service (FastAPI)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: contextos-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+
+  # ----------------------------------------------------------------------------
+  # Frontend Web Service (Next.js Dashboard)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: contextos-dashboard
+    env: node
+    rootDir: dashboard
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: contextos-backend
+          property: url
